@@ -1,0 +1,39 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block dangnhap %}
+
+<section class="login_box_area section_gap login-background">
+    <div class="container"  style="margin: 150px auto">
+        <div class="row justify-content-center">
+            <div class="col-md-6 " >
+                <h1 style="text-align: center; color:#ffefef ">ĐĂNG NHẬP</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" style="font-size: 30px; color: #fb6800;">Tài khoản</label>
+                        <input type="text" class="form-control" name="username" placeholder="Nhập tài khoản">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="font-size: 30px; color: #fb6800;">Mật khẩu</label>
+                        <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
+                    </div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn primary-btn">Đăng nhập</button>
+                    </div>
+                    
+                    {% for message in messages %}
+                        <p id="message">{{ message }}</p>
+                    {% endfor %}
+                    <br/>
+                    <p style="font-size: 25px;color: #ffefef; ">Bạn chưa có tài khoản? <a href="{% url 'dangky' %}">Đăng ký</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock dangnhap %}

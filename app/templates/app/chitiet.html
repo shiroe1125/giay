@@ -1,0 +1,115 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block chitiet %}
+<style>
+    /* Tùy chỉnh CSS cho hiển thị ảnh sản phẩm */
+    .product__details__pic__item--large {
+        max-width: 100%; /* Đảm bảo ảnh lớn không vượt quá phần tử chứa */
+        display: block; /* Loại bỏ khoảng trắng phía dưới ảnh */
+        margin: 0 auto; /* Căn giữa ảnh trong phần tử cha */
+    }
+
+    .product__details__pic__slider {
+        text-align: center; /* Căn giữa các ảnh mini trong slider */
+    }
+
+    .product__details__pic__slider img {
+        max-width: 90px; /* Kích thước tối đa cho các ảnh mini */
+        margin: 5px; /* Khoảng cách giữa các ảnh mini */
+    }
+</style>
+
+
+
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                            src="{{products.ImageURL}}" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                        <img data-imgbigurl="{{products.ImageURL}}"
+                            src="{{products.ImageURL}}" alt="">
+                        <img data-imgbigurl="{{products.ImageURL1}}"
+                            src="{{products.ImageURL1}}" alt="">
+                        <img data-imgbigurl="{{products.ImageURL2}}"
+                            src="{{products.ImageURL2}}" alt="">
+                        <img data-imgbigurl="{{products.ImageURL3}}"
+                            src="{{products.ImageURL3}}" alt="">
+                        <img data-imgbigurl="{{products.ImageURL4}}"
+                            src="{{products.ImageURL4}}" alt="">
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>{{products.name}}</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <div><b>Hãng: </b> <span>
+                        {% for category_name in category_names_list %}
+                            <span> {{ category_name }}</span>
+                        {% endfor %}
+                    </span></div>
+                    <div class="product__details__price">{{products.price | floatformat}} VND</div>
+                    <p>{{products.describe}}</p>
+                    <div class="product__details__quantity">
+                    </div>
+                    <div class="container">
+                        <h2>Size</h2>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="size39" value="39"> 39
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="size40" value="40"> 40
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="size41" value="41"> 41
+                            </label>
+                        </div>
+                        
+
+                    </div>
+                    <button  style="border: none" data-product={{products.id}}  data-action="addProduct" class="primary-btn add-btn update-btn ">Thêm vào giỏ hàng</button>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        // Lấy tất cả các ảnh mini trong slider
+        var miniImages = $(".product__details__pic__slider img");
+
+        // Bắt đầu với ảnh đầu tiên là ảnh lớn hiện tại
+        $(".product__details__pic__item--large").attr("src", miniImages.eq(0).data("imgbigurl"));
+
+        // Gắn sự kiện click cho từng ảnh mini
+        miniImages.click(function() {
+            // Lấy URL ảnh lớn từ thuộc tính data-imgbigurl của ảnh mini được click
+            var imgBigURL = $(this).data("imgbigurl");
+
+            // Đặt URL ảnh lớn cho ảnh lớn hiện tại
+            $(".product__details__pic__item--large").attr("src", imgBigURL);
+        });
+    });
+</script>
+
+{% endblock chitiet %}

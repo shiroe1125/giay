@@ -1,0 +1,249 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block trangchu %}
+<!-- start features Area -->
+
+    <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-custom">
+        <style>
+            .carousel-custom {
+                margin-bottom: 20px;
+            }
+        </style>
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="{% static 'app/images/peakpx.jpg'%}" class="d-block w-100" alt="...">
+            </div>
+
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="{% static 'app/images/peakpx.jpg'%}" class="d-block w-100" alt="...">
+            </div>
+
+            <div class="carousel-item">
+                <img src="{% static 'app/images/slide1.png'%}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+	<!-- Start category Area -->
+    <section class="category-area">
+
+        <div class="container">
+            <div class="row justify-content-center"> 
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100" src="images/category/c1.jpg" alt="">
+                                <a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
+                                    <div class="deal-details">
+                                        <h6 class="deal-title"></h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100" src="images/category/c2.jpg" alt="">
+                                <a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
+                                    <div class="deal-details">
+                                        <h6 class="deal-title">Adidas Y3 Qasa</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100" src="images/category/c3.jpg" alt="">
+                                <a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
+                                    <div class="deal-details">
+                                        <h6 class="deal-title">3</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100" src="images/category/c4.jpg" alt="">
+                                <a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
+                                    <div class="deal-details">
+                                        <h6 class="deal-title">4</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-deal">
+                        <div class="overlay"></div>
+                        <img class="img-fluid w-100" src="images/category/c5.jpg" alt="">
+                        <a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
+                            <div class="deal-details">
+                                <h6 class="deal-title">5</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .centered {
+          text-align: center; /* Căn giữa văn bản ngang */
+        }
+        </style>
+    <div class="centered">
+        <h2>Sản phẩm</h2>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row">
+                    {% for product in page.object_list %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <img class="img-fluid" src="{{ product.ImageURL }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="product-details">
+                                <h6 class="card-title"><a href="{% url 'chitiet' %}?id={{ product.id }}">{{ product.name }}</a></h6>
+                                <h5 class="card-text">{{ product.price|floatformat:0 }} VND</h5>
+                                <div class="prd-bottom">
+                                    {% comment %} <a href="" class="social-info">
+                                        <span class="ti-bag"></span>
+                                        <p class="hover-text">add to bag</p>
+                                    </a>
+                                    <a href="" class="social-info">
+                                        <span class="lnr lnr-heart"></span>
+                                        <p class="hover-text">Wishlist</p>
+                                    </a>
+                                    <a href="" class="social-info">
+                                        <span class="lnr lnr-sync"></span>
+                                        <p class="hover-text">compare</p>
+                                    </a>
+                                    <a href="" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                        <p class="hover-text">view more</p>
+                                    </a> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 %}
+                    </div>
+                    <div class="row">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <ul class="d-flex">
+                {% if page.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; Trang đầu</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Trang trước</a></li>
+                {% endif %}
+    
+                {% for num in page.paginator.page_range %}
+                    <li class="page-item {% if num == page.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+    
+                {% if page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Trang sau</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Trang cuối &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+    }
+
+    .page-item {
+        margin: 0 5px;
+    }
+
+    .page-item.active a {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .page-link {
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        color: #007bff;
+    }
+    </style>
+
+
+
+    <section class="features-area section_gap">
+		<div class="container">
+			<div class="row features-inner">
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="images/features/f-icon1.png" alt="">
+						</div>
+						<h6>Giao hàng miễn phí</h6>
+						<p>Miễn phí vận chuyển cho mọi đơn hàng</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="images/features/f-icon2.png" alt="">
+						</div>
+						<h6>Chính sách hoàn trả</h6>
+						<p>Miễn phí vận chuyển cho mọi đơn hàng</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="images/features/f-icon3.png" alt="">
+						</div>
+						<h6>Hỗ trợ 24/7</h6>
+						<p>Miễn phí vận chuyển cho mọi đơn hàng</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="images/features/f-icon4.png" alt="">
+						</div>
+						<h6>Thanh toán an toàn</h6>
+						<p>Miễn phí vận chuyển cho mọi đơn hàng</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end features Area -->
+
+{% endblock trangchu %}
